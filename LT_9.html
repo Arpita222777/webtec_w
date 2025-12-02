@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -383,4 +384,391 @@
         contactForm.addEventListener('submit', validateForm);
     </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f4f7f6;
+            --text-light: #2c3e50;
+            --card-light: #ffffff;
+            --accent-light: #3498db;
+
+            --bg-dark: #2c3e50;
+            --text-dark: #ecf0f1;
+            --card-dark: #34495e;
+            --accent-dark: #9b59b6;
+
+            --main-bg: var(--bg-light);
+            --main-text: var(--text-light);
+            --card-bg: var(--card-light);
+            --accent-color: var(--accent-light);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-bg);
+            color: var(--main-text);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links a {
+            color: var(--main-text);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            padding-bottom: 3px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--main-text);
+            transition: color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            padding: 50px 0;
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h3 {
+            color: var(--accent-color);
+        }
+
+        #greeting {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .contact-form input[type="text"], 
+        .contact-form input[type="email"], 
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: var(--card-bg);
+            color: var(--main-text);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        #submitBtn {
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submitBtn:hover {
+            opacity: 0.9;
+        }
+
+        body.dark-mode {
+            --main-bg: var(--bg-dark);
+            --main-text: var(--text-dark);
+            --card-bg: var(--card-dark);
+            --accent-color: var(--accent-dark);
+        }
+    </style>
+</head>
+<body id="body" class="light-mode">
+
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link active" data-section="about">About</a>
+                <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                <i id="themeToggle" class="fas fa-moon theme-toggle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section id="about" class="section active">
+            <h1 id="greeting"></h1>
+            <p style="font-size: 1.2rem;">Im a dynamic developer</p>
+            
+            <h3>Core Skills</h3>
+            <ul>
+                <li>JavaScript</li>
+                <li>HTML5 & Modern CSS</li>
+                <li>Responsive Design Principles</li>
+                <li>Problem Solving</li>
+            </ul>
+        </section>
+
+        <section id="projects" class="section">
+            <h1>My Projects</h1>
+            <p>Here are a few projects showcase</p>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Student Table</h3>
+                    <p>Dynamic table implementation </p>
+                </div>
+                <div class="project-card">
+                    <h3>Text Analysis</h3>
+                    <p>A utility that provides real-time character</p>
+                </div>
+                <div class="project-card">
+                    <h3>Real-Time Clock</h3>
+                    <p>object to display</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h1>Contact Me</h1>
+            <p>I am actively seeking internship opportunities. Please use the form below to get in touch!</p>
+            
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <span id="nameError" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                    <span id="emailError" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message"></textarea>
+                    <span id="messageError" class="error-message"></span>
+                </div>
+
+                <button type="submit" id="submitBtn">Send Message</button>
+                <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
+            </form>
+        </section>
+
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.getElementById('body');
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                themeToggle.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                themeToggle.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        function updateGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            const greetingElement = document.getElementById('greeting');
+            let greetingText = "";
+
+            if (hour < 12) {
+                greetingText = "Good Morning!";
+            } else if (hour < 18) {
+                greetingText = "Good Afternoon!";
+            } else {
+                greetingText = "Good Evening!";
+            }
+            
+            greetingElement.textContent = greetingText + " I'm Arpi";
+        }
+
+        updateGreeting();
+        setInterval(updateGreeting, 60000); 
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = e.target.getAttribute('data-section');
+                
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                e.target.classList.add('active');
+
+                showSection(sectionId);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('about');
+        });
+
+        const contactForm = document.getElementById('contactForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const formStatus = document.getElementById('formStatus');
+
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        function validateForm(e) {
+            e.preventDefault(); 
+
+            let isValid = true;
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const message = messageInput.value.trim();
+
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            formStatus.textContent = '';
+            formStatus.style.color = '';
+
+            if (name === "") {
+                document.getElementById('nameError').textContent = 'Name is required.';
+                isValid = false;
+            }
+
+            if (email === "") {
+                document.getElementById('emailError').textContent = 'Email is required.';
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                document.getElementById('emailError').textContent = 'Invalid email format.';
+                isValid = false;
+            }
+
+            if (message.length < 10) {
+                document.getElementById('messageError').textContent = 'Message must be at least 10 characters.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                formStatus.textContent = 'Message sent successfully! (Validation Passed)';
+                formStatus.style.color = '#2ecc71';
+                contactForm.reset();
+            } else {
+                formStatus.textContent = 'Please correct the errors in the form.';
+                formStatus.style.color = '#e74c3c';
+            }
+        }
+
+        contactForm.addEventListener('submit', validateForm);
+    </script>
+</body>
+>>>>>>> 498c9204dd6d1816c6263eb72e155dd440ac3cf6
 </html>

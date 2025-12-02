@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,4 +128,135 @@
         }
     </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Validation Form</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Portal Signup</h2>
+        
+        <form id="registrationForm">
+            
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <div class="error-message" id="fullNameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password (min 6 characters)</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <div class="error-message" id="confirmPasswordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number (Digits Only)</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                <div class="error-message" id="phoneNumberError"></div>
+            </div>
+
+            <button type="submit">Register</button>
+            
+            <div class="success-message" id="successMessage"></div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(event) {
+            
+            event.preventDefault(); 
+            
+            successMessage.textContent = '';
+            
+            if (validateForm()) {
+                
+                successMessage.textContent = 'Registration Successful! You can now access the portal.';
+                
+                form.reset(); 
+                
+                clearErrors(); 
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+            
+            clearErrors(); 
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+
+            if (fullName === "") {
+                displayError('fullNameError', 'Full Name is required.');
+                isValid = false;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                displayError('emailError', 'Email must contain "@" and "." symbols.');
+                isValid = false;
+            }
+
+            if (password.length < 6) {
+                displayError('passwordError', 'Password must be at least 6 characters long.');
+                isValid = false;
+            }
+
+            if (password !== confirmPassword) {
+                displayError('confirmPasswordError', 'Passwords do not match.');
+                isValid = false;
+            }
+
+            const onlyDigitsRegex = /^\d+$/; 
+            
+            if (phoneNumber === "") {
+                displayError('phoneNumberError', 'Phone Number is required.');
+                isValid = false;
+            } else if (!onlyDigitsRegex.test(phoneNumber)) {
+                displayError('phoneNumberError', 'Phone number must contain only digits (0-9).');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function displayError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            if (errorElement) {
+                errorElement.textContent = message; 
+            }
+        }
+
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            
+            errorElements.forEach(element => {
+                element.textContent = '';
+            });
+        }
+    </script>
+</body>
+>>>>>>> 498c9204dd6d1816c6263eb72e155dd440ac3cf6
 </html>
