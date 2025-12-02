@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Image Slider Banner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 16 / 9;
+        }
+
+        #mainImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+            display: block;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #prevBtn {
+            left: 10px;
+        }
+
+        #nextBtn {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <img id="mainImage" src="" alt="Travel Destination">
+        
+        <button id="prevBtn" class="nav-button">&#10094; Previous</button>
+        
+        <button id="nextBtn" class="nav-button">Next &#10095;</button>
+    </div>
+
+    <script>
+        const imageUrls = [
+            "https://placehold.co/800x450/1e40af/ffffff?text=1.+FRIENDLY+TRAVEL",
+            "https://placehold.co/800x450/065f46/ffffff?text=2.+ENJOY+YOUR+TOUR",
+            "https://placehold.co/800x450/842d76/ffffff?text=3.+LIFE+BEAUTIFULL",
+            "https://placehold.co/800x450/eab308/000000?text=4.+FLAXIBLE+TOUR"
+        ];
+
+        let currentIndex = 0;
+        const mainImage = document.getElementById('mainImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const intervalTime = 3000;
+
+        let slideshowInterval;
+
+        function showImage() {
+            if (currentIndex >= imageUrls.length) {
+                currentIndex = 0;
+            } 
+            else if (currentIndex < 0) {
+                currentIndex = imageUrls.length - 1;
+            } 
+
+            mainImage.src = imageUrls[currentIndex];
+        }
+
+        function restartSlideshow() {
+            clearInterval(slideshowInterval); 
+            slideshowInterval = setInterval(() => {
+                currentIndex++;
+                showImage();
+            }, intervalTime);
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex--;
+            showImage();
+            restartSlideshow();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            showImage();
+            restartSlideshow();
+        });
+
+        showImage();
+        restartSlideshow();
+    </script>
+</body>
+</html>

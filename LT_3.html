@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Toggle Feature</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            transition: background-color 0.5s, color 0.5s;
+            background-color: #ffffff;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        header {
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #cccccc;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #007bff;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+        
+        .card {
+            background-color: #f4f4f4;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #f4f4f4;
+            border-top: 1px solid #cccccc;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        #themeToggle {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #themeToggle:hover {
+            opacity: 0.9;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode header {
+            background-color: #1e1e1e;
+            border-bottom-color: #444444;
+        }
+
+        body.dark-mode header h1 {
+            color: #4CAF50;
+        }
+
+        body.dark-mode .card {
+            background-color: #1e1e1e;
+            border-color: #444444;
+        }
+
+        body.dark-mode footer {
+            background-color: #1e1e1e;
+            border-top-color: #444444;
+        }
+
+        body.dark-mode #themeToggle {
+            background-color: #4CAF50;
+            color: #121212;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Portfolio</h1>
+        <button id="themeToggle">Switch to Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <main>
+            <h2>Welcome to my portfolio!</h2>
+            <p>I am Arpita Barua.i am currently studing in BSC CSE at AIUB.I am pasionate about coding.</p>
+            
+            <div class="card">
+                <h3>Project Showcase</h3>
+                <p>This is my academic certificate.I love to gain knowledge</p>
+            </div>
+            
+            <div class="card">
+                <h3>Accessibility Check</h3>
+                <p>Cheak my portfolio.</p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Theme Toggle Demo | Current Theme: <span id="currentThemeName">Light</span> Mode</p>
+    </footer>
+
+    <script>
+        const body = document.body;
+        const toggleButton = document.getElementById('themeToggle');
+        const themeNameSpan = document.getElementById('currentThemeName');
+
+        function toggleTheme() {
+            const isDarkMode = body.classList.toggle('dark-mode');
+
+            if (isDarkMode) {
+                toggleButton.textContent = 'Switch to Light Mode';
+                themeNameSpan.textContent = 'Dark';
+            } else {
+                toggleButton.textContent = 'Switch to Dark Mode';
+                themeNameSpan.textContent = 'Light';
+            }
+        }
+
+        toggleButton.addEventListener('click', toggleTheme);
+    </script>
+</body>
+</html>

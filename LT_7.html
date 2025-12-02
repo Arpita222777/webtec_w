@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Manipulation Panel</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .controls button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        #bgColorBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        #fontSizeBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        #centerTextBtn {
+            background-color: #f39c12;
+            color: white;
+        }
+        #resetBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .controls button:hover {
+            opacity: 0.9;
+        }
+        .controls button:active {
+            transform: scale(0.98);
+        }
+
+        #sampleText {
+            padding: 20px;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            min-height: 100px;
+            font-size: 16px; /* Default size */
+            line-height: 1.6;
+            transition: all 0.5s ease;
+            text-align: left; /* Default alignment */
+            background-color: transparent; /* Default background */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Dynamic Style Control Panel</h2>
+
+        <div class="controls">
+            <button id="bgColorBtn">Change Background Color</button>
+            <button id="fontSizeBtn">Increase Font Size</button>
+            <button id="centerTextBtn">Center Text</button>
+            <button id="resetBtn">Reset Style</button>
+        </div>
+
+        <p id="sampleText">
+            This the textfield.You can change it by your choice.
+        </p>
+    </div>
+
+    <script>
+        const textBlock = document.getElementById('sampleText');
+        const bgColorBtn = document.getElementById('bgColorBtn');
+        const fontSizeBtn = document.getElementById('fontSizeBtn');
+        const centerTextBtn = document.getElementById('centerTextBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Global variable to track font size, starting at the default 16px
+        let currentFontSize = 16;
+        const defaultFontSize = 16;
+        const defaultBgColor = 'transparent';
+        const defaultAlignment = 'left';
+        
+        const colors = ['#ecf0f1', '#f9e79f', '#d5f5e3'];
+        let colorIndex = 0;
+
+        function changeBackgroundColor() {
+            // Cycle through the predefined colors
+            colorIndex = (colorIndex + 1) % colors.length;
+            textBlock.style.backgroundColor = colors[colorIndex];
+        }
+
+        function increaseFontSize() {
+          
+            if (currentFontSize < 30) {
+                currentFontSize += 2;
+                textBlock.style.fontSize = currentFontSize + 'px';
+            } else {
+                console.log("Maximum font size reached.");
+            }
+        }
+
+        function centerText() {
+            if (textBlock.style.textAlign === 'center') {
+                textBlock.style.textAlign = defaultAlignment;
+            } else {
+                textBlock.style.textAlign = 'center';
+            }
+        }
+        function resetStyles() {
+            textBlock.style.backgroundColor = defaultBgColor;
+            textBlock.style.textAlign = defaultAlignment;
+            currentFontSize = defaultFontSize;
+            textBlock.style.fontSize = currentFontSize + 'px';
+            colorIndex = 0; 
+        }
+        bgColorBtn.addEventListener('click', changeBackgroundColor);
+        fontSizeBtn.addEventListener('click', increaseFontSize);
+        centerTextBtn.addEventListener('click', centerText);
+        resetBtn.addEventListener('click', resetStyles);
+    </script>
+</body>
+</html>
