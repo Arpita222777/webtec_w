@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="Login.css">
+    
+    <script src="Login.js" ></script>
+</head>
+
+<body>
+    <h2 id="login_form_heading">Login to Your Account</h2>
+    <section aria-labelledby="login_form_heading" class="login_form">
+ 
+            <div class="form-group">
+                <label for="username">Username</label> 
+                <input type="text" id="username" name="username" required class="inputbox" placeholder="Username" />
+                
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label> 
+                <input type="password" id="password" name="password" required class="inputbox" placeholder="Password" />
+                
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="button" id="login_btn" name="submit">Login</button> 
+                <a href="EmailValid.html" id="forget_pass">Forgot Password?</a>
+            </div>
+
+            <div class="signup">
+                <p>Don't have an account?</p>
+                <a href="SignUp.html" class="signup-button">Sign Up</a>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>
